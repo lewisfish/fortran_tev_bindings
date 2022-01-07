@@ -1,0 +1,12 @@
+name = "tev_bindings"
+version = "0.1.0"
+license = "MIT"
+author = "Lewis McMillan"
+maintainer = "lewisfish92"
+copyright = "Copyright 2022, Lewis McMillan"
+[build]
+auto-executables = true
+auto-tests = true
+auto-examples = true
+[install]
+library = false
