@@ -266,7 +266,7 @@ module tev_mod
         real,             allocatable :: tile(:, :, :)
         integer,          allocatable :: channel_offsets(:), channel_strides(:)
         character(len=:), allocatable :: buf
-        integer                       :: tile_size(2), i, j, n_channels, k, ptr, l, m, xx, yy
+        integer                       :: tile_size(2), i, j, n_channels, k, ptr, l, m, xx, yy, sizeof
         logical :: gf, pt
 
         if(present(x))then
@@ -304,7 +304,9 @@ module tev_mod
         do i = 0, size(image, 1)-1, tile_size(1)
             do j = 0, size(image, 2)-1, tile_size(2)
                 tile = image(i+1:min(i+1+tile_size(1), size(image, 1)), j+1:min(j+1+tile_size(2), size(image, 2)), :)
-                buf = repeat(" ",sizeof(tile) + len(name) + 2*size(channel_names) &
+                
+                sizeof = 4*(size(tile,1) * size(tile,2) * size(tile,3))
+                buf = repeat(" ",sizeof + len(name) + 2*size(channel_names) &
                              + 8*size(channel_strides) + 8*size(channel_offsets) + 42)
 
 
